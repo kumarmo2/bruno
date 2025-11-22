@@ -10,11 +10,13 @@ export default function () {
     prevTabData: {
       uid: null,
       collectionUid: null
+      // autoSaveHandler: null
     }
   });
   const dispatch = useDispatch();
 
   useEffect(() => {
+    let autoSaveHandler = null;
     const fn = async () => {
       if (!activeTabUid) {
         return;
@@ -39,6 +41,11 @@ export default function () {
         const prevTabData = dataRef.current.prevTabData;
         prevTabData.uid = activeTab.uid;
         prevTabData.collectionUid = activeTab.collectionUid;
+        const uid = prevTabData.uid;
+        const collectionUid = prevTabData.collectionUid;
+        autoSaveHandler = setInterval(() => {
+          dispatch(saveRequest(uid, collectionUid));
+        }, 60000);
       } else {
         console.log('>>> its not a request type tab');
       }
@@ -46,6 +53,11 @@ export default function () {
       // dispatch(saveRequest(prevTab.uid, prevTab.collectionUid));
     };
     fn();
+    return () => {
+      if (autoSaveHandler) {
+        clearInterval(autoSaveHandler);
+      }
+    };
   }, [activeTabUid]);
   return null;
 }
