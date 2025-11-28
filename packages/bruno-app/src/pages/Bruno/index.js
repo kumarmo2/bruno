@@ -16,6 +16,7 @@ import Devtools from 'components/Devtools';
 import useGrpcEventListeners from 'utils/network/grpc-event-listeners';
 import useWsEventListeners from 'utils/network/ws-event-listeners';
 import Portal from 'components/Portal';
+import AutoSave from 'components/AutoSave/index';
 
 require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/xml/xml');
@@ -63,7 +64,7 @@ export default function Main() {
 
   const className = classnames({
     'is-dragging': isDragging
-  });
+    });
 
   useEffect(() => {
     if (!isElectron()) {
@@ -85,8 +86,9 @@ export default function Main() {
   }, []);
 
   return (
-    // <ErrorCapture>
+  // <ErrorCapture>
     <div id="main-container" className="flex flex-col h-screen max-h-screen overflow-hidden">
+      <AutoSave />
       {showRosettaBanner ? (
         <Portal>
           <div className="fixed bottom-0 left-0 right-0 z-10 bg-amber-100 border border-amber-400 text-amber-700 px-4 py-3" role="alert">
@@ -106,26 +108,26 @@ export default function Main() {
         data-app-state="loading"
         style={{
           height: isConsoleOpen ? `calc(100vh - 22px - ${isConsoleOpen ? '300px' : '0px'})` : 'calc(100vh - 22px)'
-          }}
-        >
-          <StyledWrapper className={className} style={{ height: '100%', zIndex: 1 }}>
-            <Sidebar />
-            <section className="flex flex-grow flex-col overflow-hidden">
-              {showHomePage ? (
-                <Welcome />
-              ) : (
-                <>
-                  <RequestTabs />
-                  <RequestTabPanel key={activeTabUid} />
-                </>
-              )}
-            </section>
-          </StyledWrapper>
-        </div>
+        }}
+      >
+        <StyledWrapper className={className} style={{ height: '100%', zIndex: 1 }}>
+          <Sidebar />
+          <section className="flex flex-grow flex-col overflow-hidden">
+            {showHomePage ? (
+              <Welcome />
+            ) : (
+              <>
+                <RequestTabs />
+                <RequestTabPanel key={activeTabUid} />
+              </>
+            )}
+          </section>
+        </StyledWrapper>
+            </div>
 
-        <Devtools mainSectionRef={mainSectionRef} />
-        <StatusBar />
-      </div>
-    // </ErrorCapture>
+      <Devtools mainSectionRef={mainSectionRef} />
+      <StatusBar />
+    </div>
+  // </ErrorCapture>
   );
 }
