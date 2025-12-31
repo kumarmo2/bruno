@@ -7,6 +7,18 @@ export const ossSchema = {
     textLink: { type: 'string', description: 'Link text color' },
     bg: { type: 'string', description: 'Background color' },
 
+    primary: {
+      type: 'object',
+      properties: {
+        solid: { type: 'string', description: 'Buttons, toggles, active pills' },
+        text: { type: 'string', description: 'Links, emphasized text' },
+        strong: { type: 'string', description: 'Thick borders, tab underlines' },
+        subtle: { type: 'string', description: 'Focus rings, subtle outlines' }
+      },
+      required: ['solid', 'text', 'strong', 'subtle'],
+      additionalProperties: false
+    },
+
     accents: {
       type: 'object',
       properties: {
@@ -165,15 +177,6 @@ export const ossSchema = {
           required: ['border', 'activeBorder'],
           additionalProperties: false
         },
-        search: {
-          type: 'object',
-          properties: {
-            border: { type: 'string' },
-            bg: { type: 'string' }
-          },
-          required: ['border', 'bg'],
-          additionalProperties: false
-        },
         collection: {
           type: 'object',
           properties: {
@@ -217,7 +220,7 @@ export const ossSchema = {
           additionalProperties: false
         }
       },
-      required: ['color', 'muted', 'bg', 'dragbar', 'search', 'collection', 'dropdownIcon'],
+      required: ['color', 'muted', 'bg', 'dragbar', 'collection', 'dropdownIcon'],
       additionalProperties: false
     },
 
@@ -228,12 +231,13 @@ export const ossSchema = {
         iconColor: { type: 'string' },
         bg: { type: 'string' },
         hoverBg: { type: 'string' },
-        shadow: { type: 'string' },
+        shadow: { type: 'string', description: 'Box shadow. Use "none" for no shadow.' },
         separator: { type: 'string' },
         selectedColor: { type: 'string' },
-        mutedText: { type: 'string' }
+        mutedText: { type: 'string' },
+        border: { type: 'string', description: 'Border color. Use "none" for no border.' }
       },
-      required: ['color', 'iconColor', 'bg', 'hoverBg', 'shadow', 'separator', 'selectedColor', 'mutedText'],
+      required: ['color', 'iconColor', 'bg', 'hoverBg', 'shadow', 'separator', 'selectedColor', 'mutedText', 'border'],
       additionalProperties: false
     },
 
@@ -588,20 +592,9 @@ export const ossSchema = {
           },
           required: ['iconColor'],
           additionalProperties: false
-        },
-        shortTab: {
-          type: 'object',
-          properties: {
-            color: { type: 'string' },
-            bg: { type: 'string' },
-            hoverColor: { type: 'string' },
-            hoverBg: { type: 'string' }
-          },
-          required: ['color', 'bg', 'hoverColor', 'hoverBg'],
-          additionalProperties: false
         }
       },
-      required: ['color', 'bg', 'bottomBorder', 'icon', 'example', 'shortTab'],
+      required: ['color', 'bg', 'bottomBorder', 'icon', 'example'],
       additionalProperties: false
     },
 
@@ -632,25 +625,9 @@ export const ossSchema = {
           properties: {
             valid: { type: 'string' },
             invalid: { type: 'string' },
-            prompt: { type: 'string' },
-            info: {
-              type: 'object',
-              properties: {
-                color: { type: 'string' },
-                bg: { type: 'string' },
-                boxShadow: { type: 'string' },
-                editorBg: { type: 'string' },
-                iconColor: { type: 'string' },
-                editorBorder: { type: 'string' },
-                editorFocusBorder: { type: 'string' },
-                editableDisplayHoverBg: { type: 'string' },
-                border: { type: 'string' }
-              },
-              required: ['color', 'bg', 'boxShadow', 'editorBg', 'iconColor', 'editorBorder', 'editorFocusBorder', 'editableDisplayHoverBg', 'border'],
-              additionalProperties: false
-            }
+            prompt: { type: 'string' }
           },
-          required: ['valid', 'invalid', 'prompt', 'info'],
+          required: ['valid', 'invalid', 'prompt'],
           additionalProperties: false
         },
         tokens: {
@@ -664,9 +641,11 @@ export const ossSchema = {
             variable: { type: 'string' },
             keyword: { type: 'string' },
             comment: { type: 'string' },
-            operator: { type: 'string' }
+            operator: { type: 'string' },
+            tag: { type: 'string' },
+            tagBracket: { type: 'string' }
           },
-          required: ['definition', 'property', 'string', 'number', 'atom', 'variable', 'keyword', 'comment', 'operator'],
+          required: ['definition', 'property', 'string', 'number', 'atom', 'variable', 'keyword', 'comment', 'operator', 'tag', 'tagBracket'],
           additionalProperties: false
         },
         searchLineHighlightCurrent: { type: 'string' },
@@ -1026,22 +1005,6 @@ export const ossSchema = {
       additionalProperties: false
     },
 
-    preferences: {
-      type: 'object',
-      properties: {
-        sidebar: {
-          type: 'object',
-          properties: {
-            border: { type: 'string' }
-          },
-          required: ['border'],
-          additionalProperties: false
-        }
-      },
-      required: ['sidebar'],
-      additionalProperties: false
-    },
-
     examples: {
       type: 'object',
       properties: {
@@ -1163,11 +1126,11 @@ export const ossSchema = {
     }
   },
   required: [
-    'mode', 'brand', 'text', 'textLink', 'bg', 'accents', 'background', 'overlay', 'font', 'shadow', 'border', 'colors', 'input',
+    'mode', 'brand', 'text', 'textLink', 'bg', 'primary', 'accents', 'background', 'overlay', 'font', 'shadow', 'border', 'colors', 'input',
     'sidebar', 'dropdown', 'workspace', 'request',
     'requestTabPanel', 'notifications', 'modal', 'button', 'button2', 'tabs',
     'requestTabs', 'codemirror', 'table', 'plainGrid', 'scrollbar', 'dragAndDrop',
-    'infoTip', 'statusBar', 'console', 'grpc', 'deprecationWarning', 'preferences', 'examples', 'app'
+    'infoTip', 'statusBar', 'console', 'grpc', 'deprecationWarning', 'examples', 'app'
   ],
   additionalProperties: false
 };

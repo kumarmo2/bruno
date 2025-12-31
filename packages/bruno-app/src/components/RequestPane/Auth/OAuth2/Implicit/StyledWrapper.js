@@ -1,8 +1,18 @@
 import styled from 'styled-components';
+import { rgba } from 'polished';
 
 const Wrapper = styled.div`
+  .oauth2-icon-container {
+    background-color: ${(props) => rgba(props.theme.primary.solid, 0.1)};
+  }
+
+  .oauth2-icon {
+    color: ${(props) => props.theme.primary.solid};
+  }
+
   label {
-    font-size: ${(props) => props.theme.font.size.base};
+    font-size: ${(props) => props.theme.font.size.sm};
+    color: ${(props) => props.theme.colors.text.subtext1};
   }
   .oauth2-input-wrapper {
     max-width: 400px;
@@ -55,6 +65,11 @@ const Wrapper = styled.div`
   .checkbox-label {
     color: ${(props) => props.theme.colors.text.primary};
     user-select: none;
+  }
+
+  input[type='checkbox'] {
+    cursor: pointer;
+    accent-color: ${(props) => props.theme.primary.solid};
   }
 `;
 

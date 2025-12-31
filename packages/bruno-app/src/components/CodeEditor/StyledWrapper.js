@@ -116,7 +116,7 @@ const StyledWrapper = styled.div`
     span.cm-atom {
       color: ${(props) => props.theme.codemirror.tokens.atom} !important;
     }
-    span.cm-variable {
+    span.cm-variable, span.cm-variable-2 {
       color: ${(props) => props.theme.codemirror.tokens.variable} !important;
     }
     span.cm-keyword {
@@ -127,6 +127,12 @@ const StyledWrapper = styled.div`
     }
     span.cm-operator {
       color: ${(props) => props.theme.codemirror.tokens.operator} !important;
+    }
+    span.cm-tag {
+      color: ${(props) => props.theme.codemirror.tokens.tag} !important;
+    }
+    span.cm-tag.cm-bracket {
+      color: ${(props) => props.theme.codemirror.tokens.tagBracket} !important;
     }
   }
 

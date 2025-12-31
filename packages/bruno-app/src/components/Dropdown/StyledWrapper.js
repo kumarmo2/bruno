@@ -3,11 +3,18 @@ import { rgba } from 'polished';
 
 const Wrapper = styled.div`
   min-width: 160px;
-  font-size: ${(props) => props.theme.font.size.base};
+  font-size: ${(props) => props.theme.font.size.sm};
   color: ${(props) => props.theme.dropdown.color};
   background-color: ${(props) => props.theme.dropdown.bg};
-  box-shadow: ${(props) => props.theme.shadow.sm};
+  ${(props) =>
+    props.theme.dropdown.shadow && props.theme.dropdown.shadow !== 'none'
+      ? `box-shadow: ${props.theme.dropdown.shadow};`
+      : ''}
   border-radius: ${(props) => props.theme.border.radius.base};
+  ${(props) =>
+    props.theme.dropdown.border && props.theme.dropdown.border !== 'none'
+      ? `border: 1px solid ${props.theme.dropdown.border};`
+      : ''}
   max-height: 90vh;
   overflow-y: auto;
   max-width: unset !important;
@@ -46,7 +53,7 @@ const Wrapper = styled.div`
     cursor: pointer;
     border-radius: 6px;
     margin: 0.0625rem 0;
-    font-size: 0.8125rem;
+    font-size: ${(props) => props.theme.font.size.sm};
 
     &.active {
       color: ${(props) => props.theme.colors.text.yellow} !important;

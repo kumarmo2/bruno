@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   label {
-    font-size: ${(props) => props.theme.font.size.base};
+    font-size: ${(props) => props.theme.font.size.sm};
+    color: ${(props) => props.theme.colors.text.subtext1};
   }
 
   .single-line-editor-wrapper {
@@ -38,7 +39,6 @@ const Wrapper = styled.div`
 
     .auth-type-label {
       width: fit-content;
-      color: ${(props) => props.theme.colors.text.yellow};
       justify-content: space-between;
       padding: 0 0.5rem;
     }

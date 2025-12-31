@@ -1,6 +1,8 @@
 // Catppuccin Macchiato - Dark Theme
 // Based on https://catppuccin.com/palette/
 
+const { rgba } = require('polished');
+
 const colors = {
   // Catppuccin Macchiato Palette
   ROSEWATER: '#f4dbd6',
@@ -43,7 +45,9 @@ const colors = {
     VARIABLE: '#7dc4e4',
     KEYWORD: '#ed8796',
     COMMENT: '#6e738d',
-    OPERATOR: '#8bd5ca'
+    OPERATOR: '#8bd5ca',
+    TAG: '#8aadf4',
+    TAG_BRACKET: '#6e738d'
   }
 };
 
@@ -53,6 +57,13 @@ const catppuccinMacchiatoTheme = {
   text: colors.TEXT,
   textLink: colors.BLUE,
   bg: colors.BASE,
+
+  primary: {
+    solid: colors.MAUVE,
+    text: colors.MAUVE,
+    strong: colors.MAUVE,
+    subtle: colors.MAUVE
+  },
 
   accents: {
     primary: colors.MAUVE
@@ -123,8 +134,8 @@ const catppuccinMacchiatoTheme = {
   },
 
   input: {
-    bg: colors.SURFACE0,
-    border: colors.SURFACE0,
+    bg: 'transparent',
+    border: colors.SURFACE1,
     focusBorder: colors.LAVENDER,
     placeholder: {
       color: colors.OVERLAY0,
@@ -137,20 +148,15 @@ const catppuccinMacchiatoTheme = {
     muted: colors.SUBTEXT0,
     bg: colors.BASE,
     dragbar: {
-      border: colors.SURFACE1,
-      activeBorder: colors.SURFACE2
-    },
-
-    search: {
-      border: '1px solid transparent',
-      bg: colors.SURFACE0
+      border: colors.SURFACE0,
+      activeBorder: colors.OVERLAY0
     },
 
     collection: {
       item: {
         bg: colors.SURFACE0,
-        hoverBg: colors.SURFACE1,
-        focusBorder: colors.LAVENDER,
+        hoverBg: colors.SURFACE0,
+        focusBorder: colors.SURFACE1,
         indentBorder: `solid 1px ${colors.SURFACE2}`,
         active: {
           indentBorder: `solid 1px ${colors.MAUVE}`
@@ -169,9 +175,10 @@ const catppuccinMacchiatoTheme = {
   dropdown: {
     color: colors.TEXT,
     iconColor: colors.SUBTEXT1,
-    bg: colors.MANTLE,
+    bg: colors.SURFACE0,
     hoverBg: 'rgba(110, 115, 141, 0.16)',
-    shadow: 'rgb(0 0 0 / 36%) 0px 2px 8px',
+    shadow: 'none',
+    border: rgba(colors.SURFACE1, 0.5),
     separator: colors.SURFACE1,
     selectedColor: colors.MAUVE,
     mutedText: colors.SUBTEXT0
@@ -209,7 +216,7 @@ const catppuccinMacchiatoTheme = {
       border: `solid 1px ${colors.SURFACE0}`
     },
     dragbar: {
-      border: colors.SURFACE1,
+      border: colors.SURFACE0,
       activeBorder: colors.OVERLAY0
     },
     responseStatus: colors.TEXT,
@@ -255,8 +262,8 @@ const catppuccinMacchiatoTheme = {
       bg: colors.BASE
     },
     input: {
-      bg: colors.SURFACE0,
-      border: colors.SURFACE0,
+      bg: 'transparent',
+      border: colors.SURFACE1,
       focusBorder: colors.LAVENDER
     },
     backdrop: {
@@ -348,12 +355,6 @@ const catppuccinMacchiatoTheme = {
     },
     example: {
       iconColor: colors.OVERLAY1
-    },
-    shortTab: {
-      color: colors.TEXT,
-      bg: 'transparent',
-      hoverColor: colors.TEXT,
-      hoverBg: colors.SURFACE0
     }
   },
 
@@ -370,18 +371,7 @@ const catppuccinMacchiatoTheme = {
     variable: {
       valid: colors.GREEN,
       invalid: colors.RED,
-      prompt: colors.BLUE,
-      info: {
-        color: colors.TEXT,
-        bg: colors.SURFACE0,
-        boxShadow: 'rgb(0 0 0 / 36%) 0px 2px 8px',
-        editorBg: colors.MANTLE,
-        iconColor: colors.OVERLAY0,
-        editorBorder: colors.SURFACE0,
-        editorFocusBorder: colors.LAVENDER,
-        editableDisplayHoverBg: 'rgba(202, 211, 245, 0.03)',
-        border: colors.SURFACE2
-      }
+      prompt: colors.BLUE
     },
     tokens: {
       definition: colors.CODEMIRROR_TOKENS.DEFINITION,
@@ -392,7 +382,9 @@ const catppuccinMacchiatoTheme = {
       variable: colors.CODEMIRROR_TOKENS.VARIABLE,
       keyword: colors.CODEMIRROR_TOKENS.KEYWORD,
       comment: colors.CODEMIRROR_TOKENS.COMMENT,
-      operator: colors.CODEMIRROR_TOKENS.OPERATOR
+      operator: colors.CODEMIRROR_TOKENS.OPERATOR,
+      tag: colors.CODEMIRROR_TOKENS.TAG,
+      tagBracket: colors.CODEMIRROR_TOKENS.TAG_BRACKET
     },
     searchLineHighlightCurrent: 'rgba(110, 115, 141, 0.18)',
     searchMatch: colors.YELLOW,
@@ -566,17 +558,11 @@ const catppuccinMacchiatoTheme = {
     text: colors.SUBTEXT1
   },
 
-  preferences: {
-    sidebar: {
-      border: colors.SURFACE1
-    }
-  },
-
   examples: {
     buttonBg: 'rgba(198, 160, 246, 0.1)',
     buttonColor: colors.MAUVE,
-    buttonText: colors.CRUST,
-    buttonIconColor: colors.CRUST,
+    buttonText: colors.TEXT,
+    buttonIconColor: colors.TEXT,
     border: colors.SURFACE1,
     urlBar: {
       border: colors.SURFACE0,

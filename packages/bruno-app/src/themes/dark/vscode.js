@@ -52,7 +52,9 @@ const colors = {
     VARIABLE: '#9cdcfe',
     KEYWORD: '#c586c0',
     COMMENT: '#6a9955',
-    OPERATOR: '#d4d4d4'
+    OPERATOR: '#d4d4d4',
+    TAG: '#569cd6',
+    TAG_BRACKET: '#808080'
   }
 };
 
@@ -62,6 +64,13 @@ const vscodeDarkTheme = {
   text: colors.TEXT,
   textLink: colors.TEXT_LINK,
   bg: colors.EDITOR_BG,
+
+  primary: {
+    solid: colors.BRAND,
+    text: colors.TEXT_LINK,
+    strong: '#0098ff',
+    subtle: '#005a9e'
+  },
 
   accents: {
     primary: colors.BRAND
@@ -132,12 +141,12 @@ const vscodeDarkTheme = {
   },
 
   input: {
-    bg: colors.GRAY_2,
+    bg: 'transparent',
     border: colors.BORDER,
     focusBorder: colors.BRAND,
     placeholder: {
       color: colors.TEXT_MUTED,
-      opacity: 0.75
+      opacity: 0.6
     }
   },
 
@@ -148,10 +157,6 @@ const vscodeDarkTheme = {
     dragbar: {
       border: colors.BORDER_LIGHT,
       activeBorder: colors.GRAY_5
-    },
-    search: {
-      border: '1px solid transparent',
-      bg: colors.GRAY_2
     },
     collection: {
       item: {
@@ -177,7 +182,8 @@ const vscodeDarkTheme = {
     iconColor: colors.TEXT,
     bg: colors.SIDEBAR_BG,
     hoverBg: colors.GRAY_3,
-    shadow: 'rgba(0, 0, 0, 0.36) 0px 2px 8px',
+    shadow: 'none',
+    border: colors.BORDER,
     separator: colors.BORDER,
     selectedColor: colors.TEXT_LINK,
     mutedText: colors.TEXT_MUTED
@@ -258,7 +264,7 @@ const vscodeDarkTheme = {
       bg: colors.GRAY_2
     },
     input: {
-      bg: colors.GRAY_3,
+      bg: 'transparent',
       border: colors.BORDER,
       focusBorder: colors.BRAND
     },
@@ -352,12 +358,6 @@ const vscodeDarkTheme = {
     },
     example: {
       iconColor: colors.GRAY_7
-    },
-    shortTab: {
-      color: colors.TEXT,
-      bg: 'transparent',
-      hoverColor: colors.TEXT,
-      hoverBg: colors.GRAY_3
     }
   },
 
@@ -374,18 +374,7 @@ const vscodeDarkTheme = {
     variable: {
       valid: colors.GREEN,
       invalid: colors.RED,
-      prompt: colors.BRAND,
-      info: {
-        color: colors.WHITE,
-        bg: colors.GRAY_3,
-        boxShadow: 'rgba(0, 0, 0, 0.36) 0px 2px 8px',
-        editorBg: colors.GRAY_2,
-        iconColor: colors.TEXT_MUTED,
-        editorBorder: colors.BORDER,
-        editorFocusBorder: colors.TEXT,
-        editableDisplayHoverBg: 'rgba(255, 255, 255, 0.03)',
-        border: colors.BORDER
-      }
+      prompt: colors.BRAND
     },
     tokens: {
       definition: colors.CODEMIRROR_TOKENS.DEFINITION,
@@ -396,7 +385,9 @@ const vscodeDarkTheme = {
       variable: colors.CODEMIRROR_TOKENS.VARIABLE,
       keyword: colors.CODEMIRROR_TOKENS.KEYWORD,
       comment: colors.CODEMIRROR_TOKENS.COMMENT,
-      operator: colors.CODEMIRROR_TOKENS.OPERATOR
+      operator: colors.CODEMIRROR_TOKENS.OPERATOR,
+      tag: colors.CODEMIRROR_TOKENS.TAG,
+      tagBracket: colors.CODEMIRROR_TOKENS.TAG_BRACKET
     },
     searchLineHighlightCurrent: 'rgba(255, 255, 0, 0.1)',
     searchMatch: '#515c6a',
@@ -570,12 +561,6 @@ const vscodeDarkTheme = {
     border: 'rgba(241, 76, 76, 0.2)',
     icon: colors.RED,
     text: colors.TEXT
-  },
-
-  preferences: {
-    sidebar: {
-      border: colors.BORDER
-    }
   },
 
   examples: {

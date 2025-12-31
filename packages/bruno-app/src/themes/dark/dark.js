@@ -1,56 +1,112 @@
+import { rgba } from 'polished';
+
+export const palette = {
+  primary: {
+    SOLID: 'hsl(39, 74%, 59%)',
+    TEXT: 'hsl(39, 74%, 64%)',
+    STRONG: 'hsl(39, 74%, 69%)',
+    SUBTLE: 'hsl(39, 74%, 54%)'
+  },
+  hues: {
+    RED: 'hsl(0,   70%, 71%)',
+    ROSE: 'hsl(350, 65%, 78%)',
+    BROWN: 'hsl(41,  52%, 77%)',
+    ORANGE: 'hsl(24,  75%, 75%)',
+    YELLOW: 'hsl(48,  68%, 74%)',
+    LIME: 'hsl(75,  65%, 71%)',
+    GREEN: 'hsl(140, 59%, 71%)',
+    TEAL: 'hsl(170, 55%, 71%)',
+    CYAN: 'hsl(190, 70%, 76%)',
+    BLUE: 'hsl(202, 82%, 80%)',
+    INDIGO: 'hsl(225, 73%, 82%)',
+    VIOLET: 'hsl(260, 65%, 81%)',
+    PURPLE: 'hsl(285, 60%, 78%)',
+    PINK: 'hsl(320, 65%, 81%)'
+  },
+  system: {
+    CONTROL_ACCENT: '#D9A342'
+  },
+  background: {
+    BASE: 'hsl(0deg 0% 10%)',
+    MANTLE: '#252526',
+    CRUST: '#1e1e1e',
+    SURFACE0: '#26292b',
+    SURFACE1: 'hsl(204, 4%, 23%)',
+    SURFACE2: '#666666'
+  },
+  text: {
+    BASE: 'hsl(0deg 0% 80%)',
+    SUBTEXT2: '#bbb',
+    SUBTEXT1: '#aaa',
+    SUBTEXT0: '#999'
+  },
+  overlay: {
+    OVERLAY2: '#666666',
+    OVERLAY1: '#555555',
+    OVERLAY0: '#444444'
+  },
+  border: {
+    BORDER2: '#444444',
+    BORDER1: '#333333',
+    BORDER0: '#2a2a2a'
+  },
+  utility: {
+    WHITE: '#ffffff',
+    BLACK: '#000000'
+  }
+};
+
+palette.intent = {
+  INFO: palette.hues.BLUE,
+  SUCCESS: palette.hues.GREEN,
+  WARNING: palette.hues.ORANGE,
+  DANGER: palette.hues.RED
+};
+
+palette.syntax = {
+  DEFINITION: palette.hues.GREEN,
+  PROPERTY: palette.hues.BLUE,
+  STRING: palette.hues.BROWN,
+  NUMBER: palette.hues.GREEN,
+  ATOM: palette.hues.YELLOW,
+  VARIABLE: palette.hues.ROSE,
+  KEYWORD: palette.hues.ROSE,
+  COMMENT: palette.text.SUBTEXT1,
+  OPERATOR: palette.hues.BROWN,
+  TAG: palette.hues.ROSE,
+  TAG_BRACKET: palette.text.SUBTEXT1
+};
+
 const colors = {
-  // BRAND: '#d9a342',
-  BRAND: '#d9a342',
-  TEXT: '#d4d4d4',
-  TEXT_MUTED: '#858585',
-  TEXT_LINK: '#8BB7E0',
-  BG: '#1e1e1e',
-
-  GREEN: '#4ec9b0',
-  YELLOW: '#d9a342',
-  WHITE: '#fff',
-  BLACK: '#000',
-
-  GRAY_1: '#252526',
   GRAY_2: '#3D3D3D',
   GRAY_3: '#444444',
   GRAY_4: '#666666',
-  GRAY_5: '#b0b0b0',
-  GRAY_6: '#cbcbcb',
-  GRAY_7: '#e5e5e5',
-  GRAY_8: '#eaeaea',
-  GRAY_9: '#f3f3f3',
-  GRAY_10: '#f8f8f8',
-
-  CODEMIRROR_TOKENS: {
-    DEFINITION: '#9ccc9c', // Softer, brighter sage — better contrast
-    PROPERTY: 'hsl(202 90% 80% / 1)', // Soft sky blue, high clarity without being loud
-    STRING: 'hsl(41 50% 69% / 1)', // VSCode-like warm string tone
-    NUMBER: 'hsl(168 50% 57% / 1)', // Standard teal with higher clarity
-    ATOM: 'hsl(305 32% 69% / 1)', // Brighter lavender, matches VSCode purple
-    VARIABLE: 'hsl(201 90% 73% / 1)', // Clear aqua-blue (used widely in dark themes)
-    KEYWORD: 'hsl(10 36% 65% / 1)', // Coral-ish but muted to avoid eye strain
-    COMMENT: '#6a9955', // Greenish-slate — very readable & subtle
-    OPERATOR: '#d4d4d4' // Light gray — consistent with dark mode operators
-  }
+  GRAY_5: '#b0b0b0'
 };
 
 const darkTheme = {
   mode: 'dark',
-  brand: colors.BRAND,
-  text: colors.TEXT,
-  textLink: colors.TEXT_LINK,
-  bg: colors.BG,
+  brand: palette.primary.SOLID,
+  text: palette.text.BASE,
+  textLink: palette.hues.BLUE,
+  bg: palette.background.BASE,
+
+  primary: {
+    solid: palette.primary.SOLID,
+    text: palette.primary.TEXT,
+    strong: palette.primary.STRONG,
+    subtle: palette.primary.SUBTLE
+  },
 
   accents: {
-    primary: colors.BRAND
+    primary: palette.primary.SOLID
   },
 
   background: {
-    base: colors.BG,
-    mantle: colors.GRAY_1,
+    base: palette.background.BASE,
+    mantle: palette.background.MANTLE,
     crust: '#333333',
-    surface0: colors.GRAY_2,
+    surface0: palette.background.SURFACE0,
     surface1: colors.GRAY_3,
     surface2: colors.GRAY_4
   },
@@ -86,83 +142,79 @@ const darkTheme = {
       lg: '10px',
       xl: '12px'
     },
-    border2: colors.GRAY_4,
-    border1: colors.GRAY_3,
-    border0: colors.GRAY_2
+    border2: palette.border.BORDER2,
+    border1: palette.border.BORDER1,
+    border0: palette.border.BORDER0
   },
 
   colors: {
     text: {
-      white: colors.WHITE,
-      green: colors.GREEN,
-      danger: '#f06f57',
-      warning: '#f57c00',
-      muted: colors.TEXT_MUTED,
-      purple: '#cd56d6',
-      yellow: colors.YELLOW,
-      subtext2: colors.GRAY_6,
-      subtext1: colors.GRAY_5,
-      subtext0: colors.GRAY_4
+      white: palette.text.BASE,
+      green: palette.intent.SUCCESS,
+      danger: palette.intent.DANGER,
+      warning: palette.intent.WARNING,
+      muted: palette.text.SUBTEXT1,
+      purple: palette.hues.PURPLE,
+      yellow: palette.hues.YELLOW,
+      subtext2: palette.text.SUBTEXT2,
+      subtext1: palette.text.SUBTEXT1,
+      subtext0: palette.text.SUBTEXT0
     },
     bg: {
-      danger: '#d03544'
+      danger: palette.hues.RED
     },
-    accent: colors.BRAND
+    accent: palette.system.CONTROL_ACCENT
   },
 
   input: {
-    bg: 'rgb(65, 65, 65)',
-    border: 'rgb(65, 65, 65)',
-    focusBorder: 'rgb(65, 65, 65)',
+    bg: 'transparent',
+    border: palette.border.BORDER2,
+    focusBorder: rgba(palette.primary.SOLID, 0.8),
     placeholder: {
-      color: '#a2a2a2',
-      opacity: 0.75
+      color: palette.text.SUBTEXT1,
+      opacity: 0.6
     }
   },
 
   sidebar: {
-    color: '#ccc',
-    muted: '#9d9d9d',
-    bg: colors.BG,
+    color: palette.text.BASE,
+    muted: palette.text.SUBTEXT1,
+    bg: palette.background.BASE,
     dragbar: {
-      border: colors.GRAY_2,
-      activeBorder: colors.GRAY_4
-    },
-
-    search: {
-      border: '1px solid transparent',
-      bg: colors.GRAY_2
+      border: palette.border.BORDER1,
+      activeBorder: palette.border.BORDER2
     },
 
     collection: {
       item: {
-        bg: '#37373D',
-        hoverBg: '#2A2D2F',
-        focusBorder: '#4e4e4e',
-        indentBorder: 'solid 1px #585858',
+        bg: palette.background.SURFACE0,
+        hoverBg: palette.background.SURFACE0,
+        focusBorder: palette.border.BORDER2,
+        indentBorder: `solid 1px ${palette.border.BORDER1}`,
         active: {
           indentBorder: 'solid 1px #4c4c4c'
         },
         example: {
-          iconColor: colors.GRAY_5
+          iconColor: palette.text.BASE
         }
       }
     },
 
     dropdownIcon: {
-      color: '#ccc'
+      color: palette.text.BASE
     }
   },
 
   dropdown: {
-    color: 'rgb(204, 204, 204)',
-    iconColor: 'rgb(204, 204, 204)',
-    bg: 'rgb(48, 48, 49)',
-    hoverBg: '#6A6A6A29',
-    shadow: 'rgb(0 0 0 / 36%) 0px 2px 8px',
-    separator: '#444',
-    selectedColor: '#d9a342',
-    mutedText: '#9B9B9B'
+    color: palette.text.BASE,
+    iconColor: palette.text.SUBTEXT2,
+    bg: palette.background.MANTLE,
+    hoverBg: palette.background.SURFACE1,
+    shadow: 'none',
+    border: palette.border.BORDER1,
+    separator: palette.border.BORDER1,
+    selectedColor: palette.primary.TEXT,
+    mutedText: palette.text.SUBTEXT1
   },
 
   workspace: {
@@ -175,35 +227,35 @@ const darkTheme = {
 
   request: {
     methods: {
-      get: '#5fbf7a', // Fresh jade — readable, calm success tone
-      post: 'hsl(270 49% 74% / 1)', // Soft amethyst — cool, composed accent
-      put: '#d7a35a', // Warm amber-bronze — bridges BRAND + STRING
-      delete: '#e06c75', // VSCode red — destructive but readable
-      patch: '#d7a35a', // Same as PUT
-      options: '#c8b072', // Muted olive-gold — neutral method
-      head: '#9da5b4' // Cool gray-blue — subtle, low priority
+      get: palette.hues.GREEN,
+      post: palette.hues.INDIGO,
+      put: palette.hues.ORANGE,
+      delete: palette.hues.RED,
+      patch: palette.hues.ORANGE,
+      options: palette.hues.TEAL,
+      head: palette.hues.CYAN
     },
 
-    grpc: '#5fb3c4', // Steel cyan — technical, protocol-heavy, calm
-    ws: '#d9a342', // Brand gold — perfect as-is
-    gql: '#c96ab1' // Softened GraphQL pink — less neon, still iconic
+    grpc: palette.hues.BROWN,
+    ws: palette.hues.ORANGE,
+    gql: palette.hues.PINK
   },
 
   requestTabPanel: {
     url: {
-      bg: colors.BG,
+      bg: palette.background.BASE,
       icon: 'rgb(204, 204, 204)',
       iconDanger: '#fa5343',
-      border: `solid 1px ${colors.GRAY_3}`
+      border: `solid 1px ${palette.border.BORDER1}`
     },
     dragbar: {
-      border: '#444',
-      activeBorder: '#8a8a8a'
+      border: palette.border.BORDER1,
+      activeBorder: palette.border.BORDER2
     },
     responseStatus: '#ccc',
-    responseOk: '#8cd656',
-    responseError: '#f06f57',
-    responsePending: '#569cd6',
+    responseOk: palette.hues.GREEN,
+    responseError: palette.hues.RED,
+    responsePending: palette.hues.BLUE,
     responseOverlayBg: 'rgba(30, 30, 30, 0.6)',
 
     card: {
@@ -235,17 +287,17 @@ const darkTheme = {
 
   modal: {
     title: {
-      color: '#ccc',
-      bg: 'rgb(38, 38, 39)'
+      color: palette.text.BASE,
+      bg: palette.background.BASE
     },
     body: {
-      color: '#ccc',
-      bg: 'rgb(48, 48, 49)'
+      color: palette.text.BASE,
+      bg: palette.background.MANTLE
     },
     input: {
-      bg: 'rgb(65, 65, 65)',
-      border: 'rgb(65, 65, 65)',
-      focusBorder: 'rgb(65, 65, 65)'
+      bg: 'transparent',
+      border: palette.border.BORDER2,
+      focusBorder: rgba(palette.primary.SOLID, 0.8)
     },
     backdrop: {
       opacity: 0.2
@@ -279,29 +331,29 @@ const darkTheme = {
   button2: {
     color: {
       primary: {
-        bg: colors.BRAND,
-        text: colors.BLACK,
-        border: colors.BRAND
+        bg: palette.primary.SOLID,
+        text: palette.utility.BLACK,
+        border: palette.primary.SOLID
       },
       secondary: {
-        bg: '#2a2a2a',
-        text: 'hsl(39 67% 64% / 1)',
-        border: '#3a3a3a'
+        bg: palette.background.MANTLE,
+        text: palette.text.BASE,
+        border: palette.border.BORDER1
       },
       success: {
-        bg: '#059669',
-        text: '#fff',
-        border: '#059669'
+        bg: palette.hues.GREEN,
+        text: palette.utility.WHITE,
+        border: palette.hues.GREEN
       },
       warning: {
-        bg: '#f59e0b',
+        bg: palette.hues.ORANGE,
         text: '#1e1e1e',
-        border: '#f59e0b'
+        border: palette.hues.ORANGE
       },
       danger: {
-        bg: '#f43f5e',
-        text: '#fff',
-        border: '#f43f5e'
+        bg: palette.hues.RED,
+        text: palette.utility.WHITE,
+        border: palette.hues.RED
       }
     }
   },
@@ -311,7 +363,7 @@ const darkTheme = {
     active: {
       fontWeight: 400,
       color: '#CCCCCC',
-      border: '#d9a342'
+      border: palette.primary.STRONG
     },
     secondary: {
       active: {
@@ -326,9 +378,9 @@ const darkTheme = {
   },
 
   requestTabs: {
-    color: '#ccc',
-    bg: '#2A2D2F',
-    bottomBorder: '#444',
+    color: palette.text.BASE,
+    bg: palette.background.SURFACE0,
+    bottomBorder: palette.border.BORDER2,
     icon: {
       color: '#9f9f9f',
       hoverColor: 'rgb(204, 204, 204)',
@@ -336,51 +388,36 @@ const darkTheme = {
     },
     example: {
       iconColor: colors.GRAY_5
-    },
-    shortTab: {
-      color: '#ccc',
-      bg: 'transparent',
-      hoverColor: '#ccc',
-      hoverBg: colors.GRAY_3
     }
   },
 
   codemirror: {
-    bg: colors.BG,
-    border: colors.BG,
+    bg: palette.background.BASE,
+    border: palette.background.BASE,
     placeholder: {
       color: '#a2a2a2',
       opacity: 0.5
     },
     gutter: {
-      bg: colors.BG
+      bg: palette.background.BASE
     },
     variable: {
-      valid: 'rgb(11 178 126)',
-      invalid: '#f06f57',
-      prompt: '#3D8DF5',
-      info: {
-        color: '#FFFFFF',
-        bg: '#343434',
-        boxShadow: 'rgb(0 0 0 / 36%) 0px 2px 8px',
-        editorBg: '#292929',
-        iconColor: '#989898',
-        editorBorder: colors.GRAY_3,
-        editorFocusBorder: '#CCCCCC',
-        editableDisplayHoverBg: 'rgba(255,255,255,0.03)',
-        border: '#4F4F4F'
-      }
+      valid: palette.hues.GREEN,
+      invalid: palette.hues.RED,
+      prompt: palette.hues.BLUE
     },
     tokens: {
-      definition: colors.CODEMIRROR_TOKENS.DEFINITION,
-      property: colors.CODEMIRROR_TOKENS.PROPERTY,
-      string: colors.CODEMIRROR_TOKENS.STRING,
-      number: colors.CODEMIRROR_TOKENS.NUMBER,
-      atom: colors.CODEMIRROR_TOKENS.ATOM,
-      variable: colors.CODEMIRROR_TOKENS.VARIABLE,
-      keyword: colors.CODEMIRROR_TOKENS.KEYWORD,
-      comment: colors.CODEMIRROR_TOKENS.COMMENT,
-      operator: colors.CODEMIRROR_TOKENS.OPERATOR
+      definition: palette.syntax.DEFINITION,
+      property: palette.syntax.PROPERTY,
+      string: palette.syntax.STRING,
+      number: palette.syntax.NUMBER,
+      atom: palette.syntax.ATOM,
+      variable: palette.syntax.VARIABLE,
+      keyword: palette.syntax.KEYWORD,
+      comment: palette.syntax.COMMENT,
+      operator: palette.syntax.OPERATOR,
+      tag: palette.syntax.TAG,
+      tagBracket: palette.syntax.TAG_BRACKET
     },
     searchLineHighlightCurrent: 'rgba(120,120,120,0.18)',
     searchMatch: '#FFD700',
@@ -444,7 +481,7 @@ const darkTheme = {
     optionHoverBg: 'rgba(255, 255, 255, 0.05)',
     optionLabelColor: '#cccccc',
     optionCountColor: '#858585',
-    checkboxColor: colors.BRAND,
+    checkboxColor: palette.primary.SOLID,
     scrollbarTrack: '#2d2d30',
     scrollbarThumb: '#5a5a5a',
     scrollbarThumbHover: '#6a6a6a'
@@ -468,9 +505,9 @@ const darkTheme = {
     },
     importPaths: {
       header: {
-        text: '#9d9d9d',
+        text: palette.text.SUBTEXT1,
         button: {
-          color: '#9d9d9d',
+          color: palette.text.SUBTEXT1,
           hoverColor: '#d4d4d4'
         }
       },
@@ -486,7 +523,7 @@ const darkTheme = {
         bg: 'transparent',
         hoverBg: 'rgba(255, 255, 255, 0.05)',
         text: '#d4d4d4',
-        icon: '#9d9d9d',
+        icon: palette.text.SUBTEXT1,
         checkbox: {
           color: '#d4d4d4'
         },
@@ -496,7 +533,7 @@ const darkTheme = {
         }
       },
       empty: {
-        text: '#9d9d9d'
+        text: palette.text.SUBTEXT1
       },
       button: {
         bg: '#185387',
@@ -507,9 +544,9 @@ const darkTheme = {
     },
     protoFiles: {
       header: {
-        text: '#9d9d9d',
+        text: palette.text.SUBTEXT1,
         button: {
-          color: '#9d9d9d',
+          color: palette.text.SUBTEXT1,
           hoverColor: '#d4d4d4'
         }
       },
@@ -529,15 +566,15 @@ const darkTheme = {
           border: '#d9a342'
         },
         text: '#d4d4d4',
-        secondaryText: '#9d9d9d',
-        icon: '#9d9d9d',
+        secondaryText: palette.text.SUBTEXT1,
+        icon: palette.text.SUBTEXT1,
         invalid: {
           opacity: 0.6,
           text: '#f06f57'
         }
       },
       empty: {
-        text: '#9d9d9d'
+        text: palette.text.SUBTEXT1
       },
       button: {
         bg: '#185387',
@@ -552,12 +589,6 @@ const darkTheme = {
     border: 'rgba(250, 83, 67, 0.1)',
     icon: '#FA5343',
     text: '#B8B8B8'
-  },
-
-  preferences: {
-    sidebar: {
-      border: '#444444'
-    }
   },
 
   examples: {
@@ -585,31 +616,31 @@ const darkTheme = {
     collection: {
       toolbar: {
         environmentSelector: {
-          bg: colors.BG,
+          bg: palette.background.BASE,
           border: colors.GRAY_3,
-          icon: colors.BRAND,
-          text: colors.TEXT,
-          caret: colors.TEXT_MUTED,
+          icon: palette.primary.TEXT,
+          text: palette.text.BASE,
+          caret: palette.text.SUBTEXT1,
           separator: colors.GRAY_3,
-          hoverBg: colors.BG,
+          hoverBg: palette.background.BASE,
           hoverBorder: colors.GRAY_4,
 
           noEnvironment: {
-            text: colors.TEXT_MUTED,
-            bg: colors.BG,
+            text: palette.text.SUBTEXT1,
+            bg: palette.background.BASE,
             border: colors.GRAY_3,
-            hoverBg: colors.BG,
+            hoverBg: palette.background.BASE,
             hoverBorder: colors.GRAY_4
           }
         },
         sandboxMode: {
           safeMode: {
             bg: 'rgba(78, 201, 176, 0.12)',
-            color: colors.GREEN
+            color: palette.hues.GREEN
           },
           developerMode: {
             bg: 'rgba(217, 163, 66, 0.11)',
-            color: colors.YELLOW
+            color: palette.hues.YELLOW
           }
         }
       }

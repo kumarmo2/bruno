@@ -41,6 +41,7 @@ const Wrapper = styled.div`
     flex-grow: 0;
     margin: 3vh 10vw;
     margin-top: 50px;
+    border: 1px solid ${(props) => props.theme.border.border0};
 
     &.modal-sm {
       min-width: 300px;
@@ -117,11 +118,11 @@ const Wrapper = styled.div`
       box-shadow: none;
       transition: border-color ease-in-out 0.1s;
       border-radius: ${(props) => props.theme.border.radius.sm};
-      background-color: ${(props) => props.theme.modal.input.bg};
-      border: 1px solid ${(props) => props.theme.modal.input.border};
+      background-color: ${(props) => props.theme.input.bg};
+      border: 1px solid ${(props) => props.theme.input.border};
 
       &:focus {
-        border: solid 1px ${(props) => props.theme.modal.input.focusBorder} !important;
+        border: solid 1px ${(props) => props.theme.input.focusBorder} !important;
         outline: none !important;
       }
     }

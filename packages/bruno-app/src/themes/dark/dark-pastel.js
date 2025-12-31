@@ -51,7 +51,9 @@ const colors = {
     VARIABLE: '#a8c5f0', // Periwinkle - variables flow
     KEYWORD: '#e09fd9', // Orchid - keywords command attention
     COMMENT: '#7a7294', // Muted violet - comments recede
-    OPERATOR: '#b8b0cc' // Pale violet - operators connect
+    OPERATOR: '#b8b0cc', // Pale violet - operators connect
+    TAG: '#7db8f0', // Sky blue - tags are structural
+    TAG_BRACKET: '#7a7294' // Muted violet - brackets recede
   }
 };
 
@@ -61,6 +63,13 @@ const darkPastelTheme = {
   text: colors.TEXT,
   textLink: colors.TEXT_LINK,
   bg: colors.BG,
+
+  primary: {
+    solid: colors.BRAND,
+    text: colors.BRAND,
+    strong: colors.BRAND,
+    subtle: colors.BRAND
+  },
 
   accents: {
     primary: colors.BRAND
@@ -131,12 +140,12 @@ const darkPastelTheme = {
   },
 
   input: {
-    bg: colors.GRAY_2,
+    bg: 'transparent',
     border: colors.GRAY_4,
     focusBorder: colors.BRAND,
     placeholder: {
-      color: colors.GRAY_6,
-      opacity: 0.8
+      color: colors.TEXT_MUTED,
+      opacity: 0.6
     }
   },
 
@@ -147,10 +156,6 @@ const darkPastelTheme = {
     dragbar: {
       border: colors.GRAY_3,
       activeBorder: colors.BRAND
-    },
-    search: {
-      border: '1px solid transparent',
-      bg: colors.GRAY_2
     },
     collection: {
       item: {
@@ -176,7 +181,8 @@ const darkPastelTheme = {
     iconColor: colors.TEXT_MUTED,
     bg: colors.GRAY_2,
     hoverBg: colors.GRAY_3,
-    shadow: 'rgba(0, 0, 0, 0.5) 0px 6px 16px -2px',
+    shadow: 'none',
+    border: colors.GRAY_4,
     separator: colors.GRAY_4,
     selectedColor: colors.BRAND,
     mutedText: colors.GRAY_6
@@ -257,7 +263,7 @@ const darkPastelTheme = {
       bg: colors.GRAY_2
     },
     input: {
-      bg: colors.GRAY_3,
+      bg: 'transparent',
       border: colors.GRAY_4,
       focusBorder: colors.BRAND
     },
@@ -351,12 +357,6 @@ const darkPastelTheme = {
     },
     example: {
       iconColor: colors.GRAY_6
-    },
-    shortTab: {
-      color: colors.TEXT_MUTED,
-      bg: 'transparent',
-      hoverColor: colors.TEXT,
-      hoverBg: colors.GRAY_3
     }
   },
 
@@ -373,18 +373,7 @@ const darkPastelTheme = {
     variable: {
       valid: colors.GREEN,
       invalid: colors.RED,
-      prompt: colors.BLUE,
-      info: {
-        color: colors.TEXT,
-        bg: colors.GRAY_2,
-        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.5)',
-        editorBg: colors.GRAY_3,
-        iconColor: colors.GRAY_6,
-        editorBorder: colors.GRAY_4,
-        editorFocusBorder: colors.BRAND,
-        editableDisplayHoverBg: colors.GRAY_3,
-        border: colors.GRAY_4
-      }
+      prompt: colors.BLUE
     },
     tokens: {
       definition: colors.CODEMIRROR_TOKENS.DEFINITION,
@@ -395,7 +384,9 @@ const darkPastelTheme = {
       variable: colors.CODEMIRROR_TOKENS.VARIABLE,
       keyword: colors.CODEMIRROR_TOKENS.KEYWORD,
       comment: colors.CODEMIRROR_TOKENS.COMMENT,
-      operator: colors.CODEMIRROR_TOKENS.OPERATOR
+      operator: colors.CODEMIRROR_TOKENS.OPERATOR,
+      tag: colors.CODEMIRROR_TOKENS.TAG,
+      tagBracket: colors.CODEMIRROR_TOKENS.TAG_BRACKET
     },
     searchLineHighlightCurrent: `${colors.BRAND}20`,
     searchMatch: colors.YELLOW,
@@ -569,12 +560,6 @@ const darkPastelTheme = {
     border: `${colors.ORANGE}35`,
     icon: colors.ORANGE,
     text: colors.TEXT
-  },
-
-  preferences: {
-    sidebar: {
-      border: colors.GRAY_4
-    }
   },
 
   examples: {

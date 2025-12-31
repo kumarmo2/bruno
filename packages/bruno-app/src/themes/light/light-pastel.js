@@ -49,7 +49,9 @@ const colors = {
     VARIABLE: '#3f7cac', // Steel blue
     KEYWORD: '#c57a92', // Dusty rose
     COMMENT: '#9a9488', // Warm muted gray
-    OPERATOR: '#7c7a73' // Soft graphite
+    OPERATOR: '#7c7a73', // Soft graphite
+    TAG: '#3a7cc4', // Muted azure
+    TAG_BRACKET: '#9a9488' // Warm muted gray
   }
 };
 
@@ -59,6 +61,13 @@ const lightPastelTheme = {
   text: colors.TEXT,
   textLink: colors.TEXT_LINK,
   bg: colors.BACKGROUND,
+
+  primary: {
+    solid: colors.BRAND,
+    text: colors.BRAND,
+    strong: colors.BRAND,
+    subtle: colors.BRAND
+  },
 
   accents: {
     primary: colors.BRAND
@@ -146,10 +155,6 @@ const lightPastelTheme = {
       border: colors.GRAY_4,
       activeBorder: colors.BRAND
     },
-    search: {
-      border: `1px solid ${colors.GRAY_4}`,
-      bg: colors.WHITE
-    },
     collection: {
       item: {
         bg: colors.GRAY_2,
@@ -175,6 +180,7 @@ const lightPastelTheme = {
     bg: colors.GRAY_1,
     hoverBg: colors.GRAY_2,
     shadow: 'rgba(0, 0, 0, 0.15) 0px 6px 16px -2px, rgba(0, 0, 0, 0.1) 0px 3px 8px -3px',
+    border: 'none',
     separator: colors.GRAY_3,
     selectedColor: colors.BRAND,
     mutedText: colors.GRAY_6
@@ -349,12 +355,6 @@ const lightPastelTheme = {
     },
     example: {
       iconColor: colors.GRAY_7
-    },
-    shortTab: {
-      color: colors.TEXT_MUTED,
-      bg: colors.WHITE,
-      hoverColor: colors.TEXT,
-      hoverBg: colors.GRAY_2
     }
   },
 
@@ -371,18 +371,7 @@ const lightPastelTheme = {
     variable: {
       valid: colors.GREEN,
       invalid: colors.RED,
-      prompt: colors.BLUE,
-      info: {
-        color: colors.TEXT,
-        bg: colors.WHITE,
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-        editorBg: colors.GRAY_1,
-        iconColor: colors.GRAY_6,
-        editorBorder: colors.GRAY_3,
-        editorFocusBorder: colors.BRAND,
-        editableDisplayHoverBg: colors.GRAY_1,
-        border: colors.GRAY_3
-      }
+      prompt: colors.BLUE
     },
     tokens: {
       definition: colors.CODEMIRROR_TOKENS.DEFINITION,
@@ -393,7 +382,9 @@ const lightPastelTheme = {
       variable: colors.CODEMIRROR_TOKENS.VARIABLE,
       keyword: colors.CODEMIRROR_TOKENS.KEYWORD,
       comment: colors.CODEMIRROR_TOKENS.COMMENT,
-      operator: colors.CODEMIRROR_TOKENS.OPERATOR
+      operator: colors.CODEMIRROR_TOKENS.OPERATOR,
+      tag: colors.CODEMIRROR_TOKENS.TAG,
+      tagBracket: colors.CODEMIRROR_TOKENS.TAG_BRACKET
     },
     searchLineHighlightCurrent: `${colors.BRAND}12`,
     searchMatch: '#e5c27a',
@@ -567,12 +558,6 @@ const lightPastelTheme = {
     border: '#fcd34d',
     icon: '#d97706',
     text: colors.TEXT
-  },
-
-  preferences: {
-    sidebar: {
-      border: colors.GRAY_3
-    }
   },
 
   examples: {

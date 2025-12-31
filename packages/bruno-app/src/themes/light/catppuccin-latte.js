@@ -43,7 +43,9 @@ const colors = {
     VARIABLE: '#209fb5',
     KEYWORD: '#d20f39',
     COMMENT: '#6c6f85',
-    OPERATOR: '#179299'
+    OPERATOR: '#179299',
+    TAG: '#1e66f5',
+    TAG_BRACKET: '#6c6f85'
   }
 };
 
@@ -53,6 +55,13 @@ const catppuccinLatteTheme = {
   text: colors.TEXT,
   textLink: colors.BLUE,
   bg: colors.BASE,
+
+  primary: {
+    solid: colors.MAUVE,
+    text: colors.MAUVE,
+    strong: colors.MAUVE,
+    subtle: colors.MAUVE
+  },
 
   accents: {
     primary: colors.MAUVE
@@ -141,11 +150,6 @@ const catppuccinLatteTheme = {
       activeBorder: colors.SURFACE2
     },
 
-    search: {
-      border: `1px solid ${colors.SURFACE1}`,
-      bg: colors.BASE
-    },
-
     collection: {
       item: {
         bg: colors.SURFACE0,
@@ -172,6 +176,7 @@ const catppuccinLatteTheme = {
     bg: colors.BASE,
     hoverBg: colors.SURFACE0,
     shadow: 'rgba(76, 79, 105, 0.25) 0px 6px 12px -2px, rgba(76, 79, 105, 0.3) 0px 3px 7px -3px',
+    border: 'none',
     separator: colors.SURFACE1,
     selectedColor: colors.MAUVE,
     mutedText: colors.SUBTEXT0
@@ -345,12 +350,6 @@ const catppuccinLatteTheme = {
     },
     example: {
       iconColor: colors.OVERLAY1
-    },
-    shortTab: {
-      color: colors.SUBTEXT1,
-      bg: colors.BASE,
-      hoverColor: colors.TEXT,
-      hoverBg: colors.SURFACE0
     }
   },
 
@@ -367,18 +366,7 @@ const catppuccinLatteTheme = {
     variable: {
       valid: colors.GREEN,
       invalid: colors.RED,
-      prompt: colors.BLUE,
-      info: {
-        color: colors.TEXT,
-        bg: colors.BASE,
-        boxShadow: '0 1px 3px rgba(76, 79, 105, 0.45)',
-        editorBg: colors.MANTLE,
-        iconColor: colors.OVERLAY0,
-        editorBorder: colors.SURFACE1,
-        editorFocusBorder: colors.LAVENDER,
-        editableDisplayHoverBg: 'rgba(76, 79, 105, 0.02)',
-        border: colors.SURFACE1
-      }
+      prompt: colors.BLUE
     },
     tokens: {
       definition: colors.CODEMIRROR_TOKENS.DEFINITION,
@@ -389,7 +377,9 @@ const catppuccinLatteTheme = {
       variable: colors.CODEMIRROR_TOKENS.VARIABLE,
       keyword: colors.CODEMIRROR_TOKENS.KEYWORD,
       comment: colors.CODEMIRROR_TOKENS.COMMENT,
-      operator: colors.CODEMIRROR_TOKENS.OPERATOR
+      operator: colors.CODEMIRROR_TOKENS.OPERATOR,
+      tag: colors.CODEMIRROR_TOKENS.TAG,
+      tagBracket: colors.CODEMIRROR_TOKENS.TAG_BRACKET
     },
     searchLineHighlightCurrent: 'rgba(124, 127, 147, 0.10)',
     searchMatch: colors.YELLOW,
@@ -562,12 +552,6 @@ const catppuccinLatteTheme = {
     border: 'rgba(210, 15, 57, 0.1)',
     icon: colors.RED,
     text: colors.TEXT
-  },
-
-  preferences: {
-    sidebar: {
-      border: colors.SURFACE1
-    }
   },
 
   examples: {

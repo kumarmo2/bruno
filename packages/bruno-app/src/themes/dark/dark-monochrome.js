@@ -30,7 +30,9 @@ const colors = {
     VARIABLE: '#b0b0b0',
     KEYWORD: '#d4d4d4',
     COMMENT: '#6a6a6a',
-    OPERATOR: '#d4d4d4'
+    OPERATOR: '#d4d4d4',
+    TAG: '#d4d4d4',
+    TAG_BRACKET: '#6a6a6a'
   }
 };
 
@@ -40,6 +42,13 @@ const darkMonochromeTheme = {
   text: colors.TEXT,
   textLink: colors.TEXT_LINK,
   bg: colors.BG,
+
+  primary: {
+    solid: colors.BRAND,
+    text: colors.BRAND,
+    strong: colors.BRAND,
+    subtle: colors.BRAND
+  },
 
   accents: {
     primary: colors.BRAND
@@ -110,12 +119,12 @@ const darkMonochromeTheme = {
   },
 
   input: {
-    bg: 'rgb(65, 65, 65)',
-    border: 'rgb(65, 65, 65)',
-    focusBorder: 'rgb(65, 65, 65)',
+    bg: 'transparent',
+    border: colors.GRAY_3,
+    focusBorder: colors.BRAND,
     placeholder: {
-      color: '#a2a2a2',
-      opacity: 0.75
+      color: colors.TEXT_MUTED,
+      opacity: 0.6
     }
   },
 
@@ -126,11 +135,6 @@ const darkMonochromeTheme = {
     dragbar: {
       border: 'transparent',
       activeBorder: colors.GRAY_4
-    },
-
-    search: {
-      border: '1px solid transparent',
-      bg: colors.GRAY_2
     },
 
     collection: {
@@ -158,7 +162,8 @@ const darkMonochromeTheme = {
     iconColor: 'rgb(204, 204, 204)',
     bg: 'rgb(48, 48, 49)',
     hoverBg: '#6A6A6A29',
-    shadow: 'rgb(0 0 0 / 36%) 0px 2px 8px',
+    shadow: 'none',
+    border: '#444',
     separator: '#444',
     selectedColor: '#a3a3a3',
     mutedText: '#9B9B9B'
@@ -242,9 +247,9 @@ const darkMonochromeTheme = {
       bg: 'rgb(48, 48, 49)'
     },
     input: {
-      bg: 'rgb(65, 65, 65)',
-      border: 'rgb(65, 65, 65)',
-      focusBorder: 'rgb(65, 65, 65)'
+      bg: 'transparent',
+      border: colors.GRAY_3,
+      focusBorder: colors.BRAND
     },
     backdrop: {
       opacity: 0.2
@@ -283,8 +288,8 @@ const darkMonochromeTheme = {
         border: colors.BRAND
       },
       secondary: {
-        bg: colors.GRAY_4,
-        text: '#fff',
+        bg: colors.BG,
+        text: colors.TEXT,
         border: colors.GRAY_5
       },
       success: {
@@ -335,12 +340,6 @@ const darkMonochromeTheme = {
     },
     example: {
       iconColor: colors.GRAY_5
-    },
-    shortTab: {
-      color: '#ccc',
-      bg: 'transparent',
-      hoverColor: '#ccc',
-      hoverBg: colors.GRAY_3
     }
   },
 
@@ -357,18 +356,7 @@ const darkMonochromeTheme = {
     variable: {
       valid: '#a3a3a3',
       invalid: '#b0b0b0',
-      prompt: '#a3a3a3',
-      info: {
-        color: '#FFFFFF',
-        bg: '#343434',
-        boxShadow: 'rgb(0 0 0 / 36%) 0px 2px 8px',
-        editorBg: '#292929',
-        iconColor: '#989898',
-        editorBorder: colors.GRAY_3,
-        editorFocusBorder: '#CCCCCC',
-        editableDisplayHoverBg: 'rgba(255,255,255,0.03)',
-        border: '#4F4F4F'
-      }
+      prompt: '#a3a3a3'
     },
     tokens: {
       definition: colors.CODEMIRROR_TOKENS.DEFINITION,
@@ -379,7 +367,9 @@ const darkMonochromeTheme = {
       variable: colors.CODEMIRROR_TOKENS.VARIABLE,
       keyword: colors.CODEMIRROR_TOKENS.KEYWORD,
       comment: colors.CODEMIRROR_TOKENS.COMMENT,
-      operator: colors.CODEMIRROR_TOKENS.OPERATOR
+      operator: colors.CODEMIRROR_TOKENS.OPERATOR,
+      tag: colors.CODEMIRROR_TOKENS.TAG,
+      tagBracket: colors.CODEMIRROR_TOKENS.TAG_BRACKET
     },
     searchLineHighlightCurrent: 'rgba(120,120,120,0.18)',
     searchMatch: '#a3a3a3',
@@ -551,12 +541,6 @@ const darkMonochromeTheme = {
     border: 'rgba(176, 176, 176, 0.1)',
     icon: '#b0b0b0',
     text: '#B8B8B8'
-  },
-
-  preferences: {
-    sidebar: {
-      border: '#444444'
-    }
   },
 
   examples: {

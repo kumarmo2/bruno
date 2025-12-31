@@ -1,5 +1,6 @@
 // VS Code Light+ Theme for Bruno
 // Based on the default Visual Studio Code Light+ theme
+import { rgba } from 'polished';
 
 const colors = {
   // VS Code Light+ Core Colors
@@ -53,7 +54,9 @@ const colors = {
     VARIABLE: '#001080',
     KEYWORD: '#af00db',
     COMMENT: '#008000',
-    OPERATOR: '#000000'
+    OPERATOR: '#000000',
+    TAG: '#800000',
+    TAG_BRACKET: '#800000'
   }
 };
 
@@ -63,6 +66,13 @@ const vscodeLightTheme = {
   text: colors.TEXT,
   textLink: colors.TEXT_LINK,
   bg: colors.EDITOR_BG,
+
+  primary: {
+    solid: colors.BRAND,
+    text: colors.TEXT_LINK,
+    strong: '#0078d4',
+    subtle: '#4da6ff'
+  },
 
   accents: {
     primary: colors.BRAND
@@ -150,10 +160,6 @@ const vscodeLightTheme = {
       border: colors.BORDER,
       activeBorder: colors.GRAY_5
     },
-    search: {
-      border: `1px solid ${colors.BORDER_DARK}`,
-      bg: colors.WHITE
-    },
     collection: {
       item: {
         bg: colors.GRAY_2,
@@ -179,6 +185,7 @@ const vscodeLightTheme = {
     bg: colors.WHITE,
     hoverBg: colors.GRAY_2,
     shadow: 'rgba(0, 0, 0, 0.16) 0px 6px 12px -2px, rgba(0, 0, 0, 0.1) 0px 3px 7px -3px',
+    border: 'none',
     separator: colors.BORDER,
     selectedColor: colors.BRAND,
     mutedText: colors.TEXT_MUTED
@@ -353,12 +360,6 @@ const vscodeLightTheme = {
     },
     example: {
       iconColor: colors.GRAY_7
-    },
-    shortTab: {
-      color: colors.TEXT_SECONDARY,
-      bg: colors.WHITE,
-      hoverColor: colors.TEXT_SECONDARY,
-      hoverBg: colors.GRAY_2
     }
   },
 
@@ -375,18 +376,7 @@ const vscodeLightTheme = {
     variable: {
       valid: colors.GREEN,
       invalid: colors.RED,
-      prompt: colors.BRAND,
-      info: {
-        color: colors.TEXT,
-        bg: colors.WHITE,
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.3)',
-        editorBg: colors.GRAY_1,
-        iconColor: colors.GRAY_6,
-        editorBorder: colors.BORDER,
-        editorFocusBorder: colors.GRAY_6,
-        editableDisplayHoverBg: 'rgba(0, 0, 0, 0.02)',
-        border: colors.BORDER
-      }
+      prompt: colors.BRAND
     },
     tokens: {
       definition: colors.CODEMIRROR_TOKENS.DEFINITION,
@@ -397,7 +387,9 @@ const vscodeLightTheme = {
       variable: colors.CODEMIRROR_TOKENS.VARIABLE,
       keyword: colors.CODEMIRROR_TOKENS.KEYWORD,
       comment: colors.CODEMIRROR_TOKENS.COMMENT,
-      operator: colors.CODEMIRROR_TOKENS.OPERATOR
+      operator: colors.CODEMIRROR_TOKENS.OPERATOR,
+      tag: colors.CODEMIRROR_TOKENS.TAG,
+      tagBracket: colors.CODEMIRROR_TOKENS.TAG_BRACKET
     },
     searchLineHighlightCurrent: 'rgba(255, 255, 0, 0.2)',
     searchMatch: '#a8ac94',
@@ -497,12 +489,12 @@ const vscodeLightTheme = {
         text: colors.RED,
         link: {
           color: colors.RED,
-          hoverColor: '#e03e3e'
+          hoverColor: colors.RED
         }
       },
       item: {
         bg: 'transparent',
-        hoverBg: 'rgba(0, 0, 0, 0.05)',
+        hoverBg: rgba(colors.BLACK, 0.05),
         text: colors.TEXT,
         icon: colors.TEXT_MUTED,
         checkbox: {
@@ -536,14 +528,14 @@ const vscodeLightTheme = {
         text: colors.RED,
         link: {
           color: colors.RED,
-          hoverColor: '#e03e3e'
+          hoverColor: colors.RED
         }
       },
       item: {
         bg: 'transparent',
-        hoverBg: 'rgba(0, 0, 0, 0.05)',
+        hoverBg: rgba(colors.BLACK, 0.05),
         selected: {
-          bg: 'rgba(0, 122, 204, 0.15)',
+          bg: rgba(colors.BRAND, 0.15),
           border: colors.BRAND
         },
         text: colors.TEXT,
@@ -571,12 +563,6 @@ const vscodeLightTheme = {
     border: 'rgba(205, 49, 49, 0.15)',
     icon: colors.RED,
     text: colors.TEXT
-  },
-
-  preferences: {
-    sidebar: {
-      border: colors.BORDER
-    }
   },
 
   examples: {
