@@ -23,7 +23,7 @@
     "@eslint/compat": "^1.3.2",
     "@faker-js/faker": "^7.6.0",
     "@jest/globals": "^29.2.0",
-    "@opencollection/types": "~0.5.0",
+    "@opencollection/types": "~0.6.0",
     "@playwright/test": "^1.51.1",
     "@rollup/plugin-json": "^6.1.0",
     "@storybook/addon-webpack5-compiler-babel": "^4.0.0",
@@ -54,7 +54,7 @@
   "scripts": {
     "setup": "node ./scripts/setup.js",
     "watch:converters": "npm run watch --workspace=packages/bruno-converters",
-    "dev": "concurrently --kill-others \"npm run dev:web\" \"npm run dev:electron\"",
+    "dev": "node ./scripts/dev.js",
     "watch": "npm run dev:watch",
     "dev:watch": "node ./scripts/dev-hot-reload.js",
     "dev:web": "npm run dev --workspace=packages/bruno-app",

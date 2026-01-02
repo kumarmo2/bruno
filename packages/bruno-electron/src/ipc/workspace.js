@@ -4,6 +4,7 @@ const fsExtra = require('fs-extra');
 const archiver = require('archiver');
 const extractZip = require('extract-zip');
 const { ipcMain, dialog } = require('electron');
+const isDev = require('electron-is-dev');
 const { createDirectory, sanitizeName } = require('../utils/filesystem');
 const yaml = require('js-yaml');
 const LastOpenedWorkspaces = require('../store/last-opened-workspaces');
@@ -26,17 +27,34 @@ const {
   getWorkspaceUid
 } = require('../utils/workspace-config');
 
+const { isValidCollectionDirectory } = require('../utils/filesystem');
+
 const DEFAULT_WORKSPACE_NAME = 'My Workspace';
 
-const prepareWorkspaceConfigForClient = (workspaceConfig, isDefault) => {
+const prepareWorkspaceConfigForClient = (workspaceConfig, workspacePath, isDefault) => {
+  const collections = workspaceConfig.collections || [];
+  const filteredCollections = collections
+    .map((collection) => {
+      if (collection.path && !path.isAbsolute(collection.path)) {
+        return { ...collection, path: path.resolve(workspacePath, collection.path) };
+      }
+      return collection;
+    })
+    .filter((collection) => collection.path && isValidCollectionDirectory(collection.path));
+
+  const config = {
+    ...workspaceConfig,
+    collections: filteredCollections
+  };
+
   if (isDefault) {
     return {
-      ...workspaceConfig,
+      ...config,
       name: DEFAULT_WORKSPACE_NAME,
       type: 'default'
     };
   }
-  return workspaceConfig;
+  return config;
 };
 
 const registerWorkspaceIpc = (mainWindow, workspaceWatcher) => {
@@ -71,7 +89,7 @@ const registerWorkspaceIpc = (mainWindow, workspaceWatcher) => {
 
         lastOpenedWorkspaces.add(dirPath);
 
-        const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, isDefault);
+        const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, dirPath, isDefault);
 
         mainWindow.webContents.send('main:workspace-opened', dirPath, workspaceUid, configForClient);
 
@@ -98,7 +116,7 @@ const registerWorkspaceIpc = (mainWindow, workspaceWatcher) => {
 
       const workspaceUid = getWorkspaceUid(workspacePath);
       const isDefault = workspaceUid === 'default';
-      const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, isDefault);
+      const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, workspacePath, isDefault);
 
       lastOpenedWorkspaces.add(workspacePath);
 
@@ -138,7 +156,7 @@ const registerWorkspaceIpc = (mainWindow, workspaceWatcher) => {
 
       const workspaceUid = getWorkspaceUid(workspacePath);
       const isDefault = workspaceUid === 'default';
-      const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, isDefault);
+      const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, workspacePath, isDefault);
 
       lastOpenedWorkspaces.add(workspacePath);
 
@@ -373,7 +391,7 @@ const registerWorkspaceIpc = (mainWindow, workspaceWatcher) => {
 
         const workspaceUid = getWorkspaceUid(finalWorkspacePath);
         const isDefault = workspaceUid === 'default';
-        const configForClient = prepareWorkspaceConfigForClient(finalConfig, isDefault);
+        const configForClient = prepareWorkspaceConfigForClient(finalConfig, finalWorkspacePath, isDefault);
 
         lastOpenedWorkspaces.add(finalWorkspacePath);
 
@@ -502,7 +520,7 @@ const registerWorkspaceIpc = (mainWindow, workspaceWatcher) => {
       const workspaceConfig = readWorkspaceConfig(workspacePath);
       const workspaceUid = getWorkspaceUid(workspacePath);
       const isDefault = workspaceUid === 'default';
-      const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, isDefault);
+      const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, workspacePath, isDefault);
       mainWindow.webContents.send('main:workspace-config-updated', workspacePath, workspaceUid, configForClient);
 
       return updatedCollections;
@@ -544,7 +562,7 @@ const registerWorkspaceIpc = (mainWindow, workspaceWatcher) => {
 
       const correctWorkspaceUid = getWorkspaceUid(workspacePath);
       const isDefault = correctWorkspaceUid === 'default';
-      const configForClient = prepareWorkspaceConfigForClient(result.updatedConfig, isDefault);
+      const configForClient = prepareWorkspaceConfigForClient(result.updatedConfig, workspacePath, isDefault);
       mainWindow.webContents.send('main:workspace-config-updated', workspacePath, correctWorkspaceUid, configForClient);
 
       return true;
@@ -596,7 +614,7 @@ const registerWorkspaceIpc = (mainWindow, workspaceWatcher) => {
 
       const { workspacePath, workspaceUid } = result;
       const workspaceConfig = readWorkspaceConfig(workspacePath);
-      const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, true);
+      const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, workspacePath, true);
 
       return {
         workspaceConfig: configForClient,
@@ -609,13 +627,24 @@ const registerWorkspaceIpc = (mainWindow, workspaceWatcher) => {
     }
   });
 
+  // Guard to prevent main:renderer-ready from running multiple times (only needed in dev mode due to strict mode)
+  let rendererReadyProcessed = false;
+
   ipcMain.on('main:renderer-ready', async (win) => {
+    if (isDev && rendererReadyProcessed) {
+      return;
+    }
+    rendererReadyProcessed = true;
+
     try {
+      let defaultWorkspacePath = null;
+
       const defaultResult = await defaultWorkspaceManager.ensureDefaultWorkspaceExists();
       if (defaultResult) {
         const { workspacePath, workspaceUid } = defaultResult;
+        defaultWorkspacePath = workspacePath;
         const workspaceConfig = readWorkspaceConfig(workspacePath);
-        const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, true);
+        const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, workspacePath, true);
 
         win.webContents.send('main:workspace-opened', workspacePath, workspaceUid, configForClient);
 
@@ -628,6 +657,10 @@ const registerWorkspaceIpc = (mainWindow, workspaceWatcher) => {
       const invalidPaths = [];
 
       for (const workspacePath of workspacePaths) {
+        if (defaultWorkspacePath && workspacePath === defaultWorkspacePath) {
+          continue;
+        }
+
         const workspaceYmlPath = path.join(workspacePath, 'workspace.yml');
 
         if (fs.existsSync(workspaceYmlPath)) {
@@ -636,7 +669,7 @@ const registerWorkspaceIpc = (mainWindow, workspaceWatcher) => {
             validateWorkspaceConfig(workspaceConfig);
             const workspaceUid = getWorkspaceUid(workspacePath);
             const isDefault = workspaceUid === 'default';
-            const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, isDefault);
+            const configForClient = prepareWorkspaceConfigForClient(workspaceConfig, workspacePath, isDefault);
 
             win.webContents.send('main:workspace-opened', workspacePath, workspaceUid, configForClient);
 

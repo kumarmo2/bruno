@@ -3,7 +3,7 @@ const path = require('path');
 const os = require('os');
 const yaml = require('js-yaml');
 const crypto = require('node:crypto');
-const { writeFile, validateName } = require('./filesystem');
+const { writeFile, validateName, isValidCollectionDirectory } = require('./filesystem');
 const { generateUidBasedOnHash } = require('./common');
 const { withLock, getWorkspaceLockKey } = require('./workspace-lock');
 
@@ -400,15 +400,31 @@ const getWorkspaceCollections = (workspacePath) => {
   const config = readWorkspaceConfig(workspacePath);
   const collections = config.collections || [];
 
-  return collections.map((collection) => {
-    if (collection.path && !path.isAbsolute(collection.path)) {
-      return {
-        ...collection,
-        path: path.resolve(workspacePath, collection.path)
-      };
-    }
-    return collection;
-  });
+  const seenPaths = new Set();
+  return collections
+    .map((collection) => {
+      if (collection.path && !path.isAbsolute(collection.path)) {
+        return {
+          ...collection,
+          path: path.resolve(workspacePath, collection.path)
+        };
+      }
+      return collection;
+    })
+    .filter((collection) => {
+      if (!collection.path) {
+        return false;
+      }
+      const normalizedPath = path.normalize(collection.path);
+      if (seenPaths.has(normalizedPath)) {
+        return false;
+      }
+      seenPaths.add(normalizedPath);
+      if (!isValidCollectionDirectory(collection.path)) {
+        return false;
+      }
+      return true;
+    });
 };
 
 const getWorkspaceApiSpecs = (workspacePath) => {
